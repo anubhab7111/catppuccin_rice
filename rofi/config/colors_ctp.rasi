@@ -1,5 +1,0 @@
-* {
-  accent: #f38ba8;
-}
-
-@import "./mocha.rasi"
