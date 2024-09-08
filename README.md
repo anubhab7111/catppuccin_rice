@@ -1,2 +1,1 @@
-Arch rice based on Catppuccin-mocha theme.
-Used hyprland as WM
+Arch rice based on Catppuccin-mocha theme using hyprland as WM
