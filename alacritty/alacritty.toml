@@ -73,3 +73,9 @@ color = "#fab387"
 [[colors.indexed_colors]]
 index = 17
 color = "#f5e0dc"
+
+[window]
+padding = { x = 25, y = 20 }
+
+[font]
+size = 14 

@@ -1,7 +1,5 @@
 require "core"
 
-vim.api.nvim_set_var('terminal_emulator', 'powershell')
-
 local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
 
 if custom_init_path then
@@ -22,15 +20,24 @@ dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
 require "plugins"
 
--- Hyprlang LSP
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-		pattern = {"*.hl", "hypr*.conf"},
-		callback = function(event)
-				print(string.format("starting hyprls for %s", vim.inspect(event)))
-				vim.lsp.start {
-						name = "hyprlang",
-						cmd = {"hyprls"},
-						root_dir = vim.fn.getcwd(),
-				}
-		end
+
+-- Code Runner mappings
+vim.keymap.set('n', '<leader>rr', ':RunCode<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>crp', ':CRProjects<CR>', { noremap = true, silent = false })
+
+-- require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets.lua" })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.cpp", "*.hpp", "*.py" },
+  callback = function(args)
+    require("conform").format({ async = false, lsp_fallback = true })
+    -- OR if using none-ls:
+    -- vim.lsp.buf.format({ async = false })
+  end,
 })
+

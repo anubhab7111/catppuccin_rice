@@ -1,9 +1,30 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 -- List of all default plugins & their definitions
 local default_plugins = {
+  { "CRAG666/code_runner.nvim", config = true, lazy = false, },
 
   "nvim-lua/plenary.nvim",
+ 
 
+  {
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("dashboard").setup({
+        theme = "hyper",
+        config = {
+          week_header = { enable = true },
+          shortcut = {
+            { desc = "󰚰 Update", group = "@property", action = "Lazy update", key = "u" },
+            { desc = " Files", group = "Label", action = "Telescope find_files", key = "f" },
+            { desc = " Recent", group = "DiagnosticHint", action = "Telescope oldfiles", key = "a" },
+            { desc = " Config", group = "Number", action = "edit $MYVIMRC", key = "c" },
+          },
+        },
+        })
+      end,
+    },
   {
     "NvChad/base46",
     branch = "v2.0",
@@ -136,6 +157,7 @@ local default_plugins = {
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("plugins.configs.others").luasnip(opts)
+          require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/" })
         end,
       },
 

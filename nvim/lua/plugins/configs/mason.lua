@@ -1,5 +1,5 @@
 local options = {
-  ensure_installed = { "lua-language-server" }, -- not an option from mason.nvim
+  ensure_installed = { "lua-language-server", "codelldb", "clangd", "clang-format", }, -- not an option from mason.nvim
 
   PATH = "skip",
 
