@@ -11,10 +11,10 @@
     "custom/icon",
     "hyprland/workspaces",
     "hyprland/window",
+    "custom/spotify",
   ],
 
   "modules-center": [
-    "custom/spotify",
     "clock"
   ],
 
@@ -24,7 +24,6 @@
     "network",
     "battery",
     "temperature",
-    "memory",
     "idle_inhibitor",
     "custom/notification",
     "custom/power",
@@ -67,8 +66,7 @@
   },
 
   "temperature": {
-    "format": " {temperatureC}°C",
-    "tooltip": "false"
+    "format": " {temperatureC}°C"
   },
 
   "hyprland/window": {
@@ -115,7 +113,7 @@
       "default": ["󰕿", "󰖀", "󰕾"],
     },
     "tooltip": false,
-    "on-click": "pwvucontrol",
+    "on-click": "pavucontrol",
   },
 
   "network": {
@@ -127,20 +125,16 @@
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
   },
-
-     "battery": {
-        "format": "<span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}%",
-        "format-icons": ["", "", "", "", ""],
-        "format-time": "{H}h{M}m",
-        "format-charging": "<span font='Font Awesome 5 Free 11'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% - {time}",
-        "format-full": "<span font='Font Awesome 5 Free 11'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  Charged",
-        "interval": 30,
-        "states": {
-            "warning": 25,
-            "critical": 10
-        },
-        "tooltip": false
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
     },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰂎", "󰁻", "󰁽", "󰁿", "󰂁", "󰁹"],
+    "max-length": 25,
+    "tooltip": false,
+  },
 
 
   "tray": {
@@ -191,10 +185,9 @@
     "on-click": "~/.config/rofi/bin/power.sh",
     "tooltip": false,
   },
-
   "custom/notification": {
     "tooltip": false,
-    "format": "Noti-{icon}",
+    "format": "{icon}",
     "format-icons": {
       "notification": "󱅫 ",
       "none": "󰂚 ",
@@ -223,5 +216,5 @@
         "on-click": "kitty -e ~/.config/waybar/custom-scripts/update",
         "tooltip": false
     },
-
 }
+
