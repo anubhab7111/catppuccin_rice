@@ -10,7 +10,7 @@ return {
   -- this opts will extend the default opts 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = {"html", "css", "bash"} },
+    -- opts = { ensure_installed = {"html", "css", "bash"} },
   },
 
   -- If your opts uses a function call ex: require*, then make opts spec a function
@@ -42,7 +42,7 @@ return {
         view = {
           cursorline = false,
           side = "left",
-          number = true,
+          -- number = true,
         },
         renderer = {
           hidden_display = "simple",

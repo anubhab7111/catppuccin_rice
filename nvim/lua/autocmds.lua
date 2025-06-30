@@ -1,6 +1,5 @@
 require "nvchad.autocmds"
 
-
 -- Dynamic terminal padding
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -13,7 +12,7 @@ autocmd("VimLeavePre", {
 })
 
 -- Show Nvdash when all buffers are closed
-vim.api.nvim_create_autocmd("BufDelete", {
+autocmd("BufDelete", {
   callback = function()
     local bufs = vim.t.bufs
     if #bufs == 1 and vim.api.nvim_buf_get_name(bufs[1]) == "" then
@@ -22,11 +21,19 @@ vim.api.nvim_create_autocmd("BufDelete", {
   end,
 })
 
---clang formatter
-vim.api.nvim_create_autocmd("BufWritePre", {
+--clang formatter along with cursor pos
+autocmd("BufWritePre", {
   pattern = "*.cpp",
+
   callback = function()
-    vim.cmd("silent! %!clang-format")
+    -- Save cursor position
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    local view = vim.fn.winsaveview()
+
+    -- Format the file
+    vim.cmd "silent! %!clang-format"
+
+    -- Restore cursor position and view
+    vim.fn.winrestview(view)
   end,
 })
-
